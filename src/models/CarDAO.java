@@ -66,7 +66,7 @@ public class CarDAO {
         return cars;
     }
 
-    // Añadir otro propietario a un coche
+   
     public boolean addOwnerToCar(String carId, String userId) throws SQLException {
         String sql = "INSERT INTO ownerships(user_id, car_id) VALUES (?, ?)";
         try (Connection conn = DBConnection.getConnection1();
@@ -77,7 +77,7 @@ public class CarDAO {
         }
     }
 
-    // Editar coche
+   
     public boolean updateCar(Car car) throws SQLException {
         String sql = "UPDATE cars SET brand = ?, model = ?, license_plate = ?, year = ? WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection1();
@@ -91,7 +91,7 @@ public class CarDAO {
         }
     }
 
-    // Eliminar coche
+   
     public boolean deleteCar(String carId) throws SQLException {
         String sql = "DELETE FROM cars WHERE car_id = ?";
         try (Connection conn = DBConnection.getConnection1();

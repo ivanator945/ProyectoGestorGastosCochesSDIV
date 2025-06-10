@@ -124,7 +124,7 @@ public class GastosView {
    private void viewExpense() throws SQLException {
 
     System.out.print("Introduce el ID del gasto: ");
-    String id = scanner.nextLine();  // UUID es String
+    String id = scanner.nextLine(); 
     Expense e = expenseController.getExpenseById(id);
     if (e == null) {
         System.out.println("Gasto no encontrado.");
