@@ -39,23 +39,22 @@ public class CarView {
                         addOwnerToCar();
                         break;
                     case "0":
-<<<<<<< HEAD
+
                         return;
-=======
-                        return; // salir del menú
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
-                    default:
+
+                       
+                 default:
                         System.out.println("❗ Opción no válida. Intenta de nuevo.");
                 }
             } catch (SQLException e) {
                 System.out.println("❌ Error en base de datos: " + e.getMessage());
             } catch (Exception e) {
                 System.out.println("⚠️ Error inesperado: " + e.getMessage());
-<<<<<<< HEAD
+
                 e.printStackTrace(); 
-=======
-                e.printStackTrace(); // Útil para depurar
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
+                e.printStackTrace();
+
             }
         }
     }
@@ -98,16 +97,16 @@ public class CarView {
     }
 
     private void addOwnerToCar() throws SQLException {
-<<<<<<< HEAD
+
        
         System.out.println("📋 Lista de usuarios disponibles:");
         List<User> users = carController.getAllUsers();
-=======
+
         // Opcional: mostrar todos los usuarios
         System.out.println("📋 Lista de usuarios disponibles:");
-        List<User> users = carController.getAllUsers(); // Este método debe existir en el controlador
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
-        for (User user : users) {
+        List<User> users1 = carController.getAllUsers(); // Este método debe existir en el controlador
+
+        for (User user : users1) {
             System.out.println(user.getUserId() + " | " + user.getUserName());
         }
 
@@ -116,11 +115,11 @@ public class CarView {
         System.out.print("🆔 UUID del nuevo propietario: ");
         String newOwnerUuid = scanner.nextLine().trim();
 
-<<<<<<< HEAD
 
-=======
-        // Validación para evitar duplicados
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
+
+       
+
         if (carController.ownershipExists(newOwnerUuid, carId)) {
             System.out.println("⚠️ Este usuario ya es propietario de este coche.");
             return;

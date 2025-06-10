@@ -118,11 +118,11 @@ public class GastosView {
         }
     }
 
-<<<<<<< HEAD
-    private void viewExpense() throws SQLException {
-=======
+
+   
+
    private void viewExpense() throws SQLException {
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
     System.out.print("Introduce el ID del gasto: ");
     String id = scanner.nextLine();  // UUID es String
     Expense e = expenseController.getExpenseById(id);
@@ -138,11 +138,11 @@ public class GastosView {
     System.out.println("Importe: " + e.getAmount());
     System.out.println("Descripción: " + e.getDescription());
 }
-<<<<<<< HEAD
-   	private void editExpense() {
-=======
+
+   	
+
 private void editExpense() {
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
     try {
         System.out.print("Introduce el ID del gasto a editar: ");
         String id = scanner.nextLine();
@@ -180,11 +180,11 @@ private void editExpense() {
         System.out.println("Error al editar el gasto: " + e.getMessage());
     }
 }
-<<<<<<< HEAD
-   	private void deleteExpense() throws SQLException {
-=======
+
+   
+
 private void deleteExpense() throws SQLException {
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
     System.out.print("Introduce el ID del gasto a eliminar: ");
     String id = scanner.nextLine();
     System.out.print("¿Seguro que quieres eliminar este gasto? (s/n): ");
