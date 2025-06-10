@@ -50,11 +50,7 @@ public class CarDAO {
         }
     }
 
-<<<<<<< HEAD
-  
-=======
-    // Obtener coches del usuario (todos donde sea propietario)
->>>>>>> eb9f5c15b45930b3971a7e2b1bcbd3fc19efb3ac
+
     public List<Car> getCarsByUserId(String userId) throws SQLException {
         String sql = "SELECT c.* FROM cars c JOIN ownerships o ON c.car_id = o.car_id WHERE o.user_id = ?";
         List<Car> cars = new ArrayList<>();
