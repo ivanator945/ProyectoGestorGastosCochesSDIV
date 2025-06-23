@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import utils.DBConnection;
 
 public class OwnershipDAO {
-
+//comprueba si un usuario es propietario de un coche específico en la base de datos.
 	public static boolean existsOwnership(String userId, String carId) throws SQLException {
 	    String sql = "SELECT COUNT(*) FROM ownerships WHERE user_id = ? AND car_id = ?";
 	    try (Connection conn = DBConnection.getConnection1();

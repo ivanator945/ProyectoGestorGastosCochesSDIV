@@ -22,8 +22,10 @@ public class CarDAO {
         PreparedStatement psOwnership = null;
         try {
             conn = DBConnection.getConnection1();
+            // Desactiva el auto-commit para controlar manualmente la transacción
             conn.setAutoCommit(false);
-
+            
+            // Prepara la sentencia para insertar el coche
             psCar = conn.prepareStatement(sqlCar);
             psCar.setString(1, car.getCarId());
             psCar.setString(2, car.getBrand());
@@ -31,34 +33,42 @@ public class CarDAO {
             psCar.setString(4, car.getLicensePlate());
             psCar.setInt(5, car.getYear());
             psCar.executeUpdate();
-
+            // Prepara la sentencia para insertar la relación de propiedad
             psOwnership = conn.prepareStatement(sqlOwnership);
             psOwnership.setString(1, ownerId);
             psOwnership.setString(2, car.getCarId());
             psOwnership.executeUpdate();
-
+            // Si ambas inserciones fueron exitosas, confirma la transacción
             conn.commit();
+            
             return true;
         } catch (SQLException e) {
+        	 // Si ocurre un error, revierte la transacción para no dejar datos a medias
             if (conn != null) conn.rollback();
             throw e;
         } finally {
+        	// Cierra los recursos abiertos en orden inverso
             if (psCar != null) psCar.close();
             if (psOwnership != null) psOwnership.close();
-            if (conn != null) conn.setAutoCommit(true);
-            if (conn != null) conn.close();
+            if (conn != null) conn.setAutoCommit(true);// Restaura el auto-commit
+            if (conn != null) conn.close();	// Cierra la conexión
         }
     }
 
     // Obtener coches del usuario (todos donde sea propietario)
     public List<Car> getCarsByUserId(String userId) throws SQLException {
         String sql = "SELECT c.* FROM cars c JOIN ownerships o ON c.car_id = o.car_id WHERE o.user_id = ?";
+        // Crea una lista vacía donde se guardarán los coches encontrados
         List<Car> cars = new ArrayList<>();
+        
+        // Intenta ejecutar la consulta usando una conexión a la base de datos
         try (Connection conn = DBConnection.getConnection1();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, userId);
-            ResultSet rs = ps.executeQuery();
+            ps.setString(1, userId);  // Sustituye el '?' de la consulta por el userId recibido como parámetro
+            ResultSet rs = ps.executeQuery(); // Ejecuta la consulta y obtiene el resultado
+            // Recorre el resultado fila a fila
             while (rs.next()) {
+            	 // Por cada fila, crea un objeto Car con los datos obtenidos de la consulta
                 cars.add(new Car(rs.getString("car_id"), rs.getString("brand"), rs.getString("model"),
                         rs.getString("license_plate"), rs.getInt("year")));
             }
