@@ -24,6 +24,7 @@ public class CarView {
                 System.out.println("1. Añadir coche");
                 System.out.println("2. Listar coches");
                 System.out.println("3. Añadir propietario a coche");
+                System.out.println("4. Eliminar coche");
                 System.out.println("0. Volver");
                 System.out.print("Opción: ");
                 String opt = scanner.nextLine().trim();
@@ -38,6 +39,10 @@ public class CarView {
                     case "3":
                         addOwnerToCar();
                         break;
+                    case "4":
+                        deleteCar();
+                        break;
+
                     case "0":
                         return; // salir del menú
                     default:
@@ -125,4 +130,23 @@ public class CarView {
             }
         }
     }
+    private void deleteCar() throws SQLException {
+        System.out.print("🔑 ID del coche a eliminar: ");
+        String carId = scanner.nextLine().trim();
+
+        // Confirmación simple antes de borrar
+        System.out.print("¿Estás seguro de que quieres eliminar este coche? (s/n): ");
+        String confirm = scanner.nextLine().trim().toLowerCase();
+        if (!confirm.equals("s")) {
+            System.out.println("❌ Eliminación cancelada.");
+            return;
+        }
+
+        if (carController.deleteCar(carId)) {
+            System.out.println("✅ Coche eliminado correctamente.");
+        } else {
+            System.out.println("❌ No se pudo eliminar el coche. Verifica que el ID sea correcto.");
+        }
+    }
+
 }
